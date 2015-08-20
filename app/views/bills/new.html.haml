@@ -1,0 +1,35 @@
+
+%h3 Create new bill
+= form_for(@bill, method: "post", url: {action: "create"}, html: {class: "form form-horizontal"}) do |f|
+  .form-group
+    = f.label :amount, "Amount", class: "col-sm-2 control-label"
+    .col-sm-3
+      .input-group
+        %span.input-group-addon $
+        = f.text_field :amount, class: "form-control"
+  .form-group
+    = f.label :category, "Category", class: "col-sm-2 control-label"
+    .col-sm-3
+      = f.select :category, %w(Eat Wear Live Travel Other), class: "form-control", prompt: 'Select Category'
+  .form-group
+    = f.label :date, "Date", class: "col-sm-2 control-label"
+    .col-sm-3
+      .input-group.date#bill_timepicker
+        = f.text_field :date, class: "form-control"
+        %span.input-group-addon
+          %span.glyphicon.glyphicon-calendar
+  .form-group
+    = f.label :is_expense, "+/-", class: "col-sm-2 control-label"
+    .col-sm-3
+      .radio-inline
+        %label
+        = f.radio_button :is_expense, true, checked: true
+        Expense
+      .radio-inline
+        %label
+        = f.radio_button :is_expense, false
+        Earn
+  .form-group
+    = f.label :note, "Note", class: "col-sm-2 control-label"
+    .col-sm-3
+      = f.text_field :note, class: "form-control"
