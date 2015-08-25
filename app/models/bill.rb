@@ -2,7 +2,7 @@ class Bill
   include ActiveModel::Conversion
   extend  ActiveModel::Naming
 
-  attr_accessor :amount, :category, :create_timestamp, :date, :is_expense, :note
+  attr_accessor :amount, :category, :create_timestamp, :date, :id, :is_expense, :note, :username
 
   def initialize(args = {})
     args.each do |key, value|

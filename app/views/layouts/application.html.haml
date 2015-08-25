@@ -1,5 +1,5 @@
 !!!
-%html
+%html{:'ng-app' => "biller"}
   %head
     %title Biller
     = stylesheet_link_tag    'application', media: 'all'
@@ -10,4 +10,7 @@
       .container-fluid
         .navbar-header
           %a.navbar-brand Biller
+    .container
+    - flash.each do |key, msg|
+      = content_tag :div, msg, class: "alert alert-#{key}" if msg.is_a?(String)
     = yield

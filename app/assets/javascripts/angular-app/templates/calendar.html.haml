@@ -1,0 +1,13 @@
+%div
+  %span{{month.format("MMMM, YYYY")}}
+%div
+  %span Sun
+  %span Mon
+  %span Tue
+  %span Wed
+  %span Thu
+  %span Fri
+  %span Sat
+%div(ng-repeat="week in weeks")
+  %span(ng-repeat="day in week.days")
+    {{day.dateOfMonth}}

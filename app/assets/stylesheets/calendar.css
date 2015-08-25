@@ -1,0 +1,93 @@
+#calendar {
+  margin: auto;
+}
+
+.calendarHeader {
+  width: 100%;
+  background-color: #2875C7;
+  height: 50px;
+  color: white;
+  text-align: center;
+  margin: inherit;
+  padding-top: 5px;
+}
+
+.monthLabel {
+  font-weight: bold;
+  font-size: 175%;
+  text-transform: uppercase;
+  text-align: center;
+  display: inline-block;
+}
+
+.arrowLeft {
+  float:left;
+  font-size: 175%;
+  padding: 5px;
+  display: inline-block;
+}
+
+.arrowRight {
+  float: right;
+  font-size: 175%;
+  padding: 5px;
+  display: inline-block;
+}
+
+.weekday {
+  width: 100%;
+  border-top: solid 1px #CCC;
+  margin: inherit;
+  color: black;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.weekday >.col-md-1 {
+  width: 14.285%;
+  border-left: solid 1px #CCC;
+  padding: 8px;
+}
+
+.weekday >.col-md-1:last-child {
+  border-right: solid 1px #CCC;
+}
+
+
+.date {
+  width: 100%;
+  border-top: solid 1px #CCC;
+  margin: inherit;
+  color: black;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+
+.date >.col-md-1 {
+  width: 14.285%;
+  border-left: solid 1px #CCC;
+  padding: 10px;
+}
+
+.date >.col-md-1:last-child {
+  border-right: solid 1px #CCC;
+}
+
+.date.row:last-child {
+  border-bottom: solid 1px #CCC;
+}
+
+.today {
+  background: #E3F2FF;
+}
+
+.differentMonth {
+  color: #C0C0C0;
+}
+
+.selected {
+  background: #2875C7;
+  color: white;
+}
