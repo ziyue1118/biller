@@ -7,7 +7,16 @@ class BillsController < ApplicationController
   end
 
   def create
-    bill = Bill.new(params[:bill].merge!({id: SecureRandom.uuid, create_timestamp: Time.now.utc}))
+    bill = Bill.new(params[:bill].merge!({
+      id: SecureRandom.uuid,
+      create_timestamp: Time.now.utc,
+      is_deleted: false,
+      username: "ziyuchen"
+    }))
+
+    rds = RdsClient.new
+    rds.save(bill)
+
     flash[:success] = "Successfully created a Bill!!"
     redirect_to bills_path
   end
