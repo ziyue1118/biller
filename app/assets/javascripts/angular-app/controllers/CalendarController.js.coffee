@@ -1,6 +1,10 @@
 calendar = angular.module 'calendar', []
 
+
+
+
 calendar.controller 'CalendarController', ($scope) ->
+  bills_by_time_div = document.getElementById('bills_by_time');
   angular.extend $scope,
     selectDay: moment()
     # Get the first day of the week midnight moment object.
@@ -10,15 +14,33 @@ calendar.controller 'CalendarController', ($scope) ->
     # Build the entire days object based on date and month
     _buildWeek: (date, month) ->
       days = []
+      # Get bills information from bills_by_time_div
       for i in [0...7]
         days.push
           dayName: date.format("ddd")
           dateOfMonth: date.date()
           isCurrentMonth: date.month() == month.month()
           isToday: date.isSame(new Date(), "day")
+          dateKey: date.format("YYYY-MM-DD")
+          bills: $scope._extract_bills(date)['bills']
+          balance: $scope._extract_bills(date)['balance']
+          count: $scope._extract_bills(date)['count']
           date: date.clone()
         date.add(1, "d")
       days
+
+    _extract_bills: (date) ->
+      bills = []
+      balance = 0
+      count = 0
+      if bills_by_time_div.getAttribute("data-" + date.format("YYYY-MM-DD"))
+        json_object = JSON.parse(bills_by_time_div.getAttribute("data-" + date.format("YYYY-MM-DD")))
+        bills = json_object["bills"]
+        balance = json_object["balance"]
+        count = json_object["count"]
+      bills: bills
+      balance: balance
+      count: count
 
     _buildMonth: (start, month) ->
       $scope.weeks = []
@@ -55,6 +77,5 @@ calendar.controller 'CalendarController', ($scope) ->
   
   $scope.buildCalender($scope.selectDay)
   # $scope.previousMonthCalender()
-
   console.log($scope.weeks)
 

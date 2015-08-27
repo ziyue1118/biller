@@ -17,6 +17,7 @@
     %div.col-md-1 Sat
   %div.date.row(ng-repeat='week in weeks')
     %div.col-md-1(ng-repeat='day in week' ng-class="{today: day.isToday, differentMonth: !day.isCurrentMonth, selected: day.date == selectDay.date}" ng-click="select(day)")
-      {{day.dateOfMonth}}
-
+      %div
+        {{day.dateOfMonth}}
+= content_tag :div, "bills_by_time", id: "bills_by_time", data: @bills_by_time
 = link_to "Create new Bill", new_bill_path
