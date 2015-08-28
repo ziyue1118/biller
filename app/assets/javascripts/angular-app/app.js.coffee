@@ -1,5 +1,7 @@
 app = angular.module 'biller', [
   'ngRoute',
+  'ngResource',
+  'calendarServiceModule',
   'calendar'
 ]
 
@@ -8,7 +10,3 @@ app = angular.module 'biller', [
 app.config ($httpProvider) ->
   $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
 
-app.config ($routeProvider) ->
-  $routeProvider.when '/',
-    templateUrl: 'templates/calender.html.haml'
-    controller: 'CalendarController'

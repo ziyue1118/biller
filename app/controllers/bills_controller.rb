@@ -10,6 +10,11 @@ class BillsController < ApplicationController
 
     # Should show all the bills you have for given time range
     @bills_by_time = BillAnalyzer.sort_bills_by_date(bills)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: JSON.pretty_generate(@bills_by_time) }
+    end
   end
 
   def create

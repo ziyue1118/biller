@@ -1,10 +1,13 @@
-calendar = angular.module 'calendar', []
+calendar = angular.module 'calendar', ['calendarServiceModule']
 
+calendar.controller 'CalendarController', ($scope, CalendarService) ->
 
+  CalendarService.getBills(
+    (data)-> 
+      $scope.bills = data
+      $scope.buildCalender($scope.selectDay)
+  )
 
-
-calendar.controller 'CalendarController', ($scope) ->
-  bills_by_time_div = document.getElementById('bills_by_time');
   angular.extend $scope,
     selectDay: moment()
     # Get the first day of the week midnight moment object.
@@ -22,9 +25,9 @@ calendar.controller 'CalendarController', ($scope) ->
           isCurrentMonth: date.month() == month.month()
           isToday: date.isSame(new Date(), "day")
           dateKey: date.format("YYYY-MM-DD")
-          bills: $scope._extract_bills(date)['bills']
-          balance: $scope._extract_bills(date)['balance']
-          count: $scope._extract_bills(date)['count']
+          bills: $scope._extract_bills(date).bills
+          balance: $scope._extract_bills(date).balance
+          count: $scope._extract_bills(date).count
           date: date.clone()
         date.add(1, "d")
       days
@@ -33,11 +36,11 @@ calendar.controller 'CalendarController', ($scope) ->
       bills = []
       balance = 0
       count = 0
-      if bills_by_time_div.getAttribute("data-" + date.format("YYYY-MM-DD"))
-        json_object = JSON.parse(bills_by_time_div.getAttribute("data-" + date.format("YYYY-MM-DD")))
-        bills = json_object["bills"]
-        balance = json_object["balance"]
-        count = json_object["count"]
+      if $scope.bills[date.format("YYYY-MM-DD")] != undefined
+        bill_object = $scope.bills[date.format("YYYY-MM-DD")]
+        bills = bill_object.bills
+        balance = bill_object.balance
+        count = bill_object.count
       bills: bills
       balance: balance
       count: count
@@ -75,7 +78,4 @@ calendar.controller 'CalendarController', ($scope) ->
     select: (day)->
       $scope.selectDay = day
   
-  $scope.buildCalender($scope.selectDay)
   # $scope.previousMonthCalender()
-  console.log($scope.weeks)
-

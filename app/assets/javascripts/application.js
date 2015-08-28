@@ -15,6 +15,7 @@
 //= require bootstrap
 //= require angular
 //= require angular-route
+//= require angular-resource
 //= require timepicker
 //= require moment
 //= require bootstrap-datetimepicker

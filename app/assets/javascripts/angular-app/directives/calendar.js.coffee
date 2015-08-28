@@ -1,1 +1,0 @@
-# calendar = angular.module 'calendar'
