@@ -1,0 +1,15 @@
+#billSearchButtonGroup {
+  padding-left: 10px;
+}
+
+#balanceContainer {
+  float: right;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.balanceAlert {
+  padding: 5px;
+  border: 1px solid;
+  border-radius: 3px;
+}

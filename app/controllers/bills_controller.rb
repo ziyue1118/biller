@@ -66,14 +66,13 @@ class BillsController < ApplicationController
   end
 
   def update
-    puts "update is called!!!"
-
     bill = Bill.new(params[:bill].merge!({
       bill_id: params[:id]
     }))
 
     rds = RdsClient.new
     rds.update(bill)
+    flash[:success] = "Finish updating the bill"
     redirect_to bill_path
   end
 

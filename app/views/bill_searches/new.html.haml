@@ -1,0 +1,59 @@
+%div.container
+  = form_for(@bill_search, method: "get", url: {action: "new"}, html: {class: "form form-inline"}) do |f|
+
+    .form-group
+      = f.label :start_time, "Start Time", class: "control-label"
+      .input-group.bill_timepicker
+        = f.text_field :start_time, class: "form-control"
+        %span.input-group-addon
+          %span.glyphicon.glyphicon-calendar
+    .form-group
+      = f.label :end_time, "End Time", class: "control-label"
+      .input-group.bill_timepicker
+        = f.text_field :end_time, class: "form-control"
+        %span.input-group-addon
+          %span.glyphicon.glyphicon-calendar
+    .form-group#billSearchButtonGroup
+      = f.submit "Search", class: "btn btn-primary"
+      %a.btn.btn-primary{href: bills_path()} Return
+    %span#balanceContainer
+      - alert_banner = @balance > 0 ? "success" : "danger"
+      %div{ class: "alert-#{alert_banner} balanceAlert" }
+        Balance:
+        = @balance
+
+
+  %table.table.table-striped.table-hover
+    %thead
+      %th Bill Id
+      %th Amount
+      %th Category
+      %th Create Time
+      %th Date
+      %th Type
+      %th Note
+    %tbody
+      - @bills.each do |bill|
+        %tr
+          %td= bill.bill_id
+          %td= bill.amount
+          %td= bill.category
+          %td= bill.create_timestamp
+          %td= bill.date
+          %td= bill.is_expense ? "Expense" : "Earn"
+          %td= bill.note
+  - max_page_links = 5
+  - search_params = params[:bill_search] || {}
+  - if @bill_search.num_of_pages > 1
+    %ul.pagination
+      - if @bill_search.page > 0
+        %li= link_to "<<", new_bill_search_path({ bill_search: search_params.merge({page: @bill_search.page - 1})})
+      - (0..@bill_search.num_of_pages - 1).each do |i|
+        - if (@bill_search.page - i).abs < max_page_links || i == 0 || i == @bill_search.num_of_pages - 1
+          %li{class: (@bill_search.page == i ? "active" : "")}
+            = link_to "#{i}", new_bill_search_path({ bill_search: search_params.merge({page: i})})
+        - elsif (@bill_search.page - i).abs == max_page_links
+          %li.disabled
+            %span ...
+      - if @bill_search.page < @bill_search.num_of_pages - 1
+        %li= link_to ">>", new_bill_search_path({ bill_search: search_params.merge({page: @bill_search.page + 1})})

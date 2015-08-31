@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'bills#index'
 
   resources :bills
+  resources :bill_searches, only: :new
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
