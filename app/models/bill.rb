@@ -12,4 +12,8 @@ class Bill
     @create_timestamp = TimestampFormatter.convert(@create_timestamp) if @create_timestamp.kind_of? Time
     @amount = @amount.to_f if @amount.kind_of? String
   end
+
+  def persisted?
+    false
+  end
 end

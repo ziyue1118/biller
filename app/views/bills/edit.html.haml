@@ -1,6 +1,6 @@
 %div.contain-fluid.col-md-offset-4
-  %h3 Create new bill
-  = form_for(@bill, method: "post", url: {action: "create"}, html: {class: "form form-horizontal"}) do |f|
+  %h3 Update this bill
+  = form_for(@bill, method: "put", url: bill_path, html: {class: "form form-horizontal"}) do |f|
     .form-group
       = f.label :amount, "Amount", class: "col-sm-1 control-label"
       .col-sm-3
@@ -35,5 +35,5 @@
         = f.text_field :note, class: "form-control"
     .form-group
       .col-sm-offset-1.col-sm-3
-        = f.submit "Submit", class: "btn btn-primary"
-        %a.btn.btn-primary{href: bills_path()} Cancel
+        = f.submit "Save Change", class: "btn btn-primary"
+        %a.btn.btn-primary{href: bill_path()} Cancel

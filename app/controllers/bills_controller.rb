@@ -37,4 +37,44 @@ class BillsController < ApplicationController
     @bill = Bill.new
   end
 
+  def show
+    rds = RdsClient.new
+    bills = rds.get_user_bill_by_id(params[:id])
+
+    if bills.empty?
+      flash[:danger] = "There is no bill with #{params[:id]}"
+      redirect_to bills_path
+    else
+      @bill = bills[0]
+      respond_to do |format|
+        format.html
+        format.json { render json: JSON.pretty_generate(bill_note: @bill.note) }
+      end
+    end
+  end
+
+  def edit
+    rds = RdsClient.new
+    bills = rds.get_user_bill_by_id(params[:id])
+
+    if bills.empty?
+      flash[:danger] = "There is no bill with #{params[:id]}"
+      redirect_to bills_path
+    else
+      @bill = bills[0]
+    end
+  end
+
+  def update
+    puts "update is called!!!"
+
+    bill = Bill.new(params[:bill].merge!({
+      bill_id: params[:id]
+    }))
+
+    rds = RdsClient.new
+    rds.update(bill)
+    redirect_to bill_path
+  end
+
 end

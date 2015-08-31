@@ -1,0 +1,34 @@
+%div.contain-fluid.col-md-offset-3
+  %form.form-horizontal
+    %div.form-group
+      %label.col-sm-2.control-label Bill Id
+      %div.col-sm-4
+        %input.form-control{readonly: true, placeholder: @bill.bill_id}
+    %div.form-group
+      %label.col-sm-2.control-label Amount
+      %div.col-sm-4
+        %input.form-control{readonly: true, placeholder: @bill.amount}
+    %div.form-group
+      %label.col-sm-2.control-label Category
+      %div.col-sm-4
+        %input.form-control{readonly: true, placeholder: @bill.category}
+    %div.form-group
+      %label.col-sm-2.control-label Create Time
+      %div.col-sm-4
+        %input.form-control{readonly: true, placeholder: @bill.create_timestamp}
+    %div.form-group
+      %label.col-sm-2.control-label Date
+      %div.col-sm-4
+        %input.form-control{readonly: true, placeholder: @bill.date}
+    %div.form-group
+      %label.col-sm-2.control-label Type
+      %div.col-sm-4
+        %input.form-control{readonly: true, placeholder: @bill.is_expense ? "Expense" : "Earn"}
+    %div.form-group
+      %label.col-sm-2.control-label Note
+      %div.col-sm-4
+        %input.form-control{readonly: true, placeholder: @bill.note}
+    %div.form-group
+      .col-sm-offset-2.col-sm-3
+        %a.btn.btn-primary{href: edit_bill_path()} Edit
+        %a.btn.btn-primary{href: bills_path()} Cancel

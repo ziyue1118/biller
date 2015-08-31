@@ -1,6 +1,6 @@
 calendar = angular.module 'calendar', ['calendarServiceModule']
 
-calendar.controller 'CalendarController', ($scope, CalendarService) ->
+calendar.controller 'CalendarController', ($scope, CalendarService, $element) ->
 
   CalendarService.getBills(
     (data)-> 
@@ -17,7 +17,6 @@ calendar.controller 'CalendarController', ($scope, CalendarService) ->
     # Build the entire days object based on date and month
     _buildWeek: (date, month) ->
       days = []
-      # Get bills information from bills_by_time_div
       for i in [0...7]
         days.push
           dayName: date.format("ddd")
@@ -74,8 +73,3 @@ calendar.controller 'CalendarController', ($scope, CalendarService) ->
       $scope._resetTime(previous.month(previous.month() - 1).date(1))
       $scope.month.month($scope.month.month() - 1)
       $scope._buildMonth(previous, $scope.month)
-
-    select: (day)->
-      $scope.selectDay = day
-  
-  # $scope.previousMonthCalender()

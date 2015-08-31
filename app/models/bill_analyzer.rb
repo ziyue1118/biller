@@ -27,8 +27,8 @@ class BillAnalyzer
     end
 
     time_to_bills.each do |key, bills_hash|
-      bill_ids = bills_hash[:bills].collect { |bill| bill.bill_id }
-      time_to_bills[key] = bills_hash.merge!({ bills: bill_ids, balance: calculate_balance(bills_hash[:bills]), count: bills_hash[:bills].size})
+      bill_id_note_hash_array = bills_hash[:bills].collect { |bill| { bill_id: bill.bill_id, note: bill.note } }
+      time_to_bills[key] = bills_hash.merge!({ bills: bill_id_note_hash_array, balance: calculate_balance(bills_hash[:bills]), count: bills_hash[:bills].size})
     end
     time_to_bills
   end

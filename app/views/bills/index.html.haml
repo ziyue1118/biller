@@ -1,4 +1,4 @@
-%div#calendar.container(ng-controller="CalendarController")
+%div#calendar.container(ng-controller="CalendarController as calendar")
   %div.calendarHeader
     %div.arrowLeft
       %i.glyphicon.glyphicon-chevron-left(ng-click="previousMonthCalender()")
@@ -16,7 +16,6 @@
     %div.col-md-1 Fri
     %div.col-md-1 Sat
   %div.date.row(ng-repeat='week in weeks')
-    %div.col-md-1(ng-repeat='day in week' ng-class="{today: day.isToday, differentMonth: !day.isCurrentMonth, selected: day.date == selectDay.date}" ng-click="select(day)")
-      %div
-        {{day.count}}
+    %div.col-md-1(ng-repeat='day in week' ng-class="{today: day.isToday, differentMonth: !day.isCurrentMonth, selected: day.date == selectDay.date}")
+      %calendar-popover
 = link_to "Create new Bill", new_bill_path

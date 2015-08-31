@@ -1,0 +1,8 @@
+%div(ng-click="select(day)")
+  %div(id="{{day.dateKey}}" title="Total balance: {{day.balance}}")
+    {{day.dateOfMonth}}
+    %span.badge(ng-show="day.count > 0")
+      {{day.count}}
+    %div(id="{{day.dateKey}}-content" ng-show=false)
+      %div(ng-repeat="bill in day.bills")
+        %li{{bill.note}}
