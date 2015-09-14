@@ -9,7 +9,7 @@ class RdsClient
   end
 
   def get_user_bills(username, start_time=nil, end_time=nil)
-    if start_time.nil? || end_time.nil? || start_time = "" || end_time = ""
+    if start_time.nil? || end_time.nil? || start_time == "" || end_time == ""
       to_bill(@rds.exec(get_all_bills_by_user_query(username)))
     else
       to_bill(@rds.exec(get_user_bills_by_time_range_query(username, start_time, end_time)))

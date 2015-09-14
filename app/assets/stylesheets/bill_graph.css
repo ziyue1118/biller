@@ -1,0 +1,17 @@
+.bill-graph-axis path {
+    fill: none;
+    stroke: black;
+    stroke-width: 2px;
+    shape-rendering: crispEdges;
+}
+
+.bill-graph-axis text {
+    font-family: Lato;
+    font-size: 13px;
+}
+
+.balance-line {
+    stroke: url(#balance-zero);
+    stroke-width: 2px;
+    fill: none;
+}
