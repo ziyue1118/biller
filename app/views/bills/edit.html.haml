@@ -1,39 +1,41 @@
-%div.contain-fluid.col-md-offset-4
-  %h3 Update this bill
-  = form_for(@bill, method: "put", url: bill_path, html: {class: "form form-horizontal"}) do |f|
-    .form-group
-      = f.label :amount, "Amount", class: "col-sm-1 control-label"
-      .col-sm-3
-        .input-group
-          %span.input-group-addon $
-          = f.text_field :amount, class: "form-control"
-    .form-group
-      = f.label :category, "Category", class: "col-sm-1 control-label"
-      .col-sm-3
-        = f.select :category, %w(Eat Wear Live Travel Other), {include_blank: 'Select Category'}, class: "form-control"
-    .form-group
-      = f.label :date, "Date", class: "col-sm-1 control-label"
-      .col-sm-3
-        .input-group.date#bill_timepicker
-          = f.text_field :date, class: "form-control"
-          %span.input-group-addon
-            %span.glyphicon.glyphicon-calendar
-    .form-group
-      = f.label :is_expense, "+/-", class: "col-sm-1 control-label"
-      .col-sm-3
-        .radio-inline
-          %label.control-label
-          = f.radio_button :is_expense, true, checked: true
-          Expense
-        .radio-inline
-          %label.control-label
-          = f.radio_button :is_expense, false
-          Earn
-    .form-group
-      = f.label :note, "Note", class: "col-sm-1 control-label"
-      .col-sm-3
-        = f.text_field :note, class: "form-control"
-    .form-group
-      .col-sm-offset-1.col-sm-3
-        = f.submit "Save Change", class: "btn btn-primary"
-        %a.btn.btn-primary{href: bill_path()} Cancel
+%div.calendar-form-container
+  %div.calendar-form
+    %div
+      %h3.calendar-form-title Update this bill
+      = form_for(@bill, method: "put", url: bill_path, html: {class: "form form-horizontal"}) do |f|
+        .form-group
+          = f.label :amount, "Amount", class: "col-sm-2 control-label"
+          .col-sm-8
+            .input-group
+              %span.input-group-addon $
+              = f.text_field :amount, class: "form-control"
+        .form-group
+          = f.label :category, "Category", class: "col-sm-2 control-label"
+          .col-sm-8
+            = f.select :category, %w(Eat Wear Live Travel Other), {include_blank: 'Select Category'}, class: "form-control"
+        .form-group
+          = f.label :date, "Date", class: "col-sm-2 control-label"
+          .col-sm-8
+            .input-group.bill_timepicker
+              = f.text_field :date, class: "form-control"
+              %span.input-group-addon
+                %span.glyphicon.glyphicon-calendar
+        .form-group
+          = f.label :is_expense, "+/-", class: "col-sm-2 control-label"
+          .col-sm-8
+            .radio-inline
+              %label.control-label
+              = f.radio_button :is_expense, true, checked: true
+              Expense
+            .radio-inline
+              %label.control-label
+              = f.radio_button :is_expense, false
+              Earn
+        .form-group
+          = f.label :note, "Note", class: "col-sm-2 control-label"
+          .col-sm-8
+            = f.text_field :note, class: "form-control"
+        .form-group
+          .col-sm-offset-2.col-sm-8
+            = f.submit "Save Change", class: "btn btn-primary"
+            %a.btn.btn-primary{href: bill_path()} Cancel

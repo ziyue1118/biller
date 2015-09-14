@@ -20,6 +20,7 @@
 //= require popover-initializer
 //= require moment
 //= require bootstrap-datetimepicker
+//= require d3.v3
 
 //= require angular-app/app
 //= require_tree ./angular-app/templates

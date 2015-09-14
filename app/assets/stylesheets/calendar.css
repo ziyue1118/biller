@@ -1,5 +1,33 @@
+body {
+  background-color: #f9f9f9;
+}
+
 #calendar {
   margin: auto;
+  background-color: #FFFFFF;
+  padding: 0px;
+}
+
+.calendar-form-title {
+  padding: 10px;
+}
+
+.calendar-form {
+  border-bottom: 2px solid;
+  border-bottom-color: #eeeeee;
+  border-right: 2px solid;
+  border-right-color: #eeeeee;
+  background-color: #FFFFFF;
+}
+
+.calendar-form-container {
+  width: 50%;
+  margin: auto;
+}
+
+.calendar-form .form-group {
+  margin-left: 150px;
+  margin-right: 150px;
 }
 
 .calendarHeader {

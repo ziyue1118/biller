@@ -1,6 +1,7 @@
 app = angular.module 'biller', [
   'ngRoute',
   'ngResource',
+  'bill_graph',
   'calendarServiceModule',
   'calendar',
   'calendarPopoverDirectiveModule'
