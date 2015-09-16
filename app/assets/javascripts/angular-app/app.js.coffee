@@ -4,7 +4,9 @@ app = angular.module 'biller', [
   'bill_graph',
   'calendarServiceModule',
   'calendar',
-  'calendarPopoverDirectiveModule'
+  'calendarPopoverDirectiveModule',
+  'ui.bootstrap',
+  'bill_search'
 ]
 
 # for compatibility with Rails CSRF protection

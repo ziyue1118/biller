@@ -16,4 +16,12 @@ class Bill
   def persisted?
     false
   end
+
+  def to_hash
+    bill_hash = {}
+    self.instance_variables.each {|var| bill_hash[var.to_s.delete("@")] = self.instance_variable_get(var) }
+    bill_hash
+  end
+
+
 end

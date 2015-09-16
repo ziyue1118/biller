@@ -1,2 +1,19 @@
 %div.container(ng-controller="BillGraphController as graph")
+  %div.bill-graph-form-container
+    .form.form-inline
+      .form-group
+        %label.control-label Start Time
+        .input-group
+          %input.form-control(ng-model="start.date" datepicker-popup="{{format}}" is-open="start.opened")
+          %span.input-group-addon
+            %span.glyphicon.glyphicon-calendar(ng-click="start_open($event)")
+      .form-group
+        %label.control-label End Time
+        .input-group
+          %input.form-control(ng-model="end.date" datepicker-popup="{{format}}" is-open="end.opened")
+          %span.input-group-addon
+            %i.glyphicon.glyphicon-calendar(ng-click="end_open($event)")
+        .form-group#billSearchButtonGroup
+          %button.btn.btn-primary(ng-click="get_bills_and_draw_graph(start.date, end.date)") Graph
+          %a.btn.btn-primary{href: bills_path()} Return
   %svg#bill_graph_visualisation{ width:"1200", height: "500"}

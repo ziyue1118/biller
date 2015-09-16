@@ -6,7 +6,7 @@ class BillsController < ApplicationController
     rds = RdsClient.new
 
     #TODO: change the hard-code username to be the login username.
-    bills = rds.get_user_bills('ziyuchen')
+    bills = rds.get_user_bills('ziyuchen', params[:start], params[:end])
 
     # Should show all the bills you have for given time range
     @bills_by_time = BillAnalyzer.sort_bills_by_date(bills)

@@ -18,12 +18,7 @@ class RdsClient
 
   def get_user_bill_by_id(bill_id)
     bills = @rds.exec(get_user_bill_by_id_query(bill_id))
-    puts bills
-    if !bills.nil?
-      to_bill(bills)
-    else
-      []
-    end
+    to_bill(bills)
   end
 
   def update(bill)
@@ -31,19 +26,23 @@ class RdsClient
   end
 
   def to_bill(bills)
-    bills.collect { |bill|
-      Bill.new(
-        bill_id: bill["bill_id"],
-        amount: bill["amount"].to_f,
-        category: bill["category"],
-        create_timestamp: bill["create_timestamp"],
-        date: bill["date"],
-        is_expense: bill["is_expense"] == 't',
-        is_deleted: bill["is_deleted"] == 't',
-        username: bill["username"],
-        note: bill["note"]
-      )
-    }
+    if bills.nil?
+      []
+    else
+      bills.collect { |bill|
+        Bill.new(
+          bill_id: bill["bill_id"],
+          amount: bill["amount"].to_f,
+          category: bill["category"],
+          create_timestamp: bill["create_timestamp"],
+          date: bill["date"],
+          is_expense: bill["is_expense"] == 't',
+          is_deleted: bill["is_deleted"] == 't',
+          username: bill["username"],
+          note: bill["note"]
+        )
+      }
+    end
   end
 
   def create_bill_query(bill)

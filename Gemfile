@@ -25,6 +25,7 @@ gem 'haml'
 # Dependency for timepicker
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.15.35'
+gem 'angular-ui-bootstrap-rails'
 
 # Postgres dependency
 gem 'pg'

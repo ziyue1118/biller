@@ -16,11 +16,13 @@
 //= require angular
 //= require angular-route
 //= require angular-resource
-//= require timepicker
+//= require angular-ui-bootstrap
+//= require angular-ui-bootstrap-tpls
 //= require popover-initializer
 //= require moment
 //= require bootstrap-datetimepicker
 //= require d3.v3
+//= require timepicker
 
 //= require angular-app/app
 //= require_tree ./angular-app/templates
