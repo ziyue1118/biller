@@ -17,7 +17,7 @@
       %input.form-control(ng-model="keyword" placeholder="Filter Results")
     %span#balanceContainer
       %div{ class: "alert-{{alert_banner}} balanceAlert" }
-        Balance: {{balance}}
+        Balance: {{balance | currency}}
 
 
   %table.table.table-striped.table-hover
@@ -30,7 +30,7 @@
       %th Type
       %th Note
     %tbody
-      %tr(ng-repeat='bill in bills | filter: keyword')
+      %tr(ng-repeat='bill in bills.slice(((currentPage-1) * itemsPerPage), (currentPage * itemsPerPage)) | filter: keyword')
         %td {{bill.bill_id}}
         %td {{bill.amount}}
         %td {{bill.category}}
@@ -38,18 +38,4 @@
         %td {{bill.date}}
         %td {{bill.is_expense ? "Expense" : "Earn"}}
         %td {{bill.note}}
-  / - max_page_links = 5
-  / - search_params = params[:bill_search] || {}
-  / - if @bill_search.num_of_pages > 1
-  /   %ul.pagination
-  /     - if @bill_search.page > 0
-  /       %li= link_to "<<", new_bill_search_path({ bill_search: search_params.merge({page: @bill_search.page - 1})})
-  /     - (0..@bill_search.num_of_pages - 1).each do |i|
-  /       - if (@bill_search.page - i).abs < max_page_links || i == 0 || i == @bill_search.num_of_pages - 1
-  /         %li{class: (@bill_search.page == i ? "active" : "")}
-  /           = link_to "#{i}", new_bill_search_path({ bill_search: search_params.merge({page: i})})
-  /       - elsif (@bill_search.page - i).abs == max_page_links
-  /         %li.disabled
-  /           %span ...
-  /     - if @bill_search.page < @bill_search.num_of_pages - 1
-  /       %li= link_to ">>", new_bill_search_path({ bill_search: search_params.merge({page: @bill_search.page + 1})})
+  %pagination(total-items="bills.length" ng-model="currentPage" max-size="maxSize" class="pagination" boundary-links="true" items-per-page="itemsPerPage")

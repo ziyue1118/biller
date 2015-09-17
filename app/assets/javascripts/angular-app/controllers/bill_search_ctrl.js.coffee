@@ -19,6 +19,11 @@ bill_search.controller 'BillSearchController', ($scope, CalendarService) ->
   $scope.end_open = ($event) ->
     $scope.end.opened = true
 
+  # This is for angular UI pagination
+  $scope.currentPage = 1
+  $scope.maxSize = 5 # show how many buttons on the pagination
+  $scope.itemsPerPage = 15
+
   $scope.search_bills_by_time_range = (start_time, end_time) ->
     CalendarService.searchBills({start: start_time, end: end_time}, (
       (data) ->

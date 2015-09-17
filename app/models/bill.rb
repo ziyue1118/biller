@@ -23,5 +23,4 @@ class Bill
     bill_hash
   end
 
-
 end
