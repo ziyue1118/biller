@@ -8,7 +8,8 @@ app = angular.module 'biller', [
   'ui.bootstrap',
   'ui.select',
   'bill_search',
-  'bill_create'
+  'bill_create',
+  'bill_update'
 ]
 
 # for compatibility with Rails CSRF protection

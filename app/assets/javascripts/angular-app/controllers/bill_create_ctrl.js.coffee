@@ -26,7 +26,7 @@ bill_create.controller 'BillCreateController', ($scope, CalendarService)->
 
 
   $scope.bill = { is_expense: "expense" }
-  $scope.default_categories = ["Eat", "Travel", "Live", "Other"]
+  $scope.default_categories = ["Eat", "Travel", "Wear", "Live", "Other"]
 
   $scope.createBill = (bill) ->
     new_bill = new CalendarService.createBill

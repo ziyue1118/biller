@@ -50,7 +50,7 @@ class BillsController < ApplicationController
       @bill = bills[0]
       respond_to do |format|
         format.html
-        format.json { render json: JSON.pretty_generate(bill_note: @bill.note) }
+        format.json { render json: JSON.pretty_generate(bill: @bill.to_hash) }
       end
     end
   end
