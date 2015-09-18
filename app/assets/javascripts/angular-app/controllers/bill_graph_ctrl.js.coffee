@@ -19,7 +19,7 @@ bill_graph.controller 'BillGraphController', ($scope, CalendarService) ->
     $scope.end.opened = true
 
   $scope.get_bills_and_draw_graph = (start_time, end_time) ->
-    CalendarService.getBills({start: start_time, end: end_time}, (
+    CalendarService.getBills.exec({start: start_time, end: end_time}, (
       (data) ->
         $scope.generate_graph(data)
     ))
@@ -30,10 +30,10 @@ bill_graph.controller 'BillGraphController', ($scope, CalendarService) ->
     width = 1200
     height = 500
     margin =
-      top: 20
-      right: 20
-      bottom: 20
-      left: 20
+      top: 30
+      right: 30
+      bottom: 30
+      left: 30
 
     Object.keys(bills).filter((v) -> v[0] == "$").forEach((v) -> delete bills[v]) # exclude $resolved and $promise
     start_date = Object.keys(bills)[0]

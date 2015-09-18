@@ -11,9 +11,9 @@ class BillSearch
     @end   = args[:end]
   end
 
-  def retrieve_bills
+  def retrieve_bills(username)
     rds = RdsClient.new
-    bills = rds.get_user_bills('ziyuchen', @start, @end)
+    bills = rds.get_user_bills(username, @start, @end)
     bills
   end
 

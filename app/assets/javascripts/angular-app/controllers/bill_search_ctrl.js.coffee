@@ -25,7 +25,7 @@ bill_search.controller 'BillSearchController', ($scope, CalendarService) ->
   $scope.itemsPerPage = 15
 
   $scope.search_bills_by_time_range = (start_time, end_time) ->
-    CalendarService.searchBills({start: start_time, end: end_time}, (
+    CalendarService.searchBills.exec({start: start_time, end: end_time}, (
       (data) ->
         $scope.bills = data.bills
         $scope.balance = data.balance

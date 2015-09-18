@@ -31,7 +31,9 @@
       %th Note
     %tbody
       %tr(ng-repeat='bill in bills.slice(((currentPage-1) * itemsPerPage), (currentPage * itemsPerPage)) | filter: keyword')
-        %td {{bill.bill_id}}
+        %td 
+          %a{href: '/bills/{{bill.bill_id}}'}
+            {{bill.bill_id}}
         %td {{bill.amount}}
         %td {{bill.category}}
         %td {{bill.create_timestamp}}

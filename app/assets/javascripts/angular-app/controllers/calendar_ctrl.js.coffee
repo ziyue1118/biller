@@ -2,7 +2,7 @@ calendar = angular.module 'calendar', ['calendarServiceModule']
 
 calendar.controller 'CalendarController', ($scope, CalendarService, $element) ->
 
-  CalendarService.getBills(
+  CalendarService.getBills.exec(
     (data)-> 
       $scope.bills = data
       $scope.buildCalender($scope.selectDay)

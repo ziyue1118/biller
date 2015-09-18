@@ -2,7 +2,7 @@ class BillSearchesController < ApplicationController
   def new
     @bill_search = BillSearch.new(params)
   
-    @bills = @bill_search.retrieve_bills
+    @bills = @bill_search.retrieve_bills("ziyuchen")
     @balance = BillAnalyzer.calculate_balance(@bills)
     @bills_hash = @bills.collect { |bill| bill.to_hash }
 

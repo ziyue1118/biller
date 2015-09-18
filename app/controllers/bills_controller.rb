@@ -18,6 +18,7 @@ class BillsController < ApplicationController
   end
 
   def create
+    puts params
     #TODO: change the hard-code username to be the login username.
     bill = Bill.new(params[:bill].merge!({
       bill_id: SecureRandom.uuid,
@@ -30,6 +31,7 @@ class BillsController < ApplicationController
     rds.save(bill)
 
     flash[:success] = "Successfully created a Bill!!"
+
     redirect_to bills_path
   end
 

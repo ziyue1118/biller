@@ -18,6 +18,7 @@
 //= require angular-resource
 //= require angular-ui-bootstrap
 //= require angular-ui-bootstrap-tpls
+//= require select
 //= require popover-initializer
 //= require moment
 //= require bootstrap-datetimepicker
