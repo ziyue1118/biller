@@ -21,8 +21,20 @@ class RdsClient
     to_bill(bills)
   end
 
-  def update(bill)
+  def update_bill(bill)
     @rds.exec(update_user_bill_query(bill))
+  end
+
+  def create_user(user)
+    @rds.exec(create_user_query(user))
+  end
+
+  def get_user_by_username(username)
+    to_user(@rds.exec(get_user_by_username_query(username)))
+  end
+
+  def get_user_by_email(email)
+    to_user(@rds.exec(get_user_by_email_query(email)))
   end
 
   def to_bill(bills)
@@ -45,9 +57,23 @@ class RdsClient
     end
   end
 
+  def to_user(users)
+    if users.nil?
+      nil
+    else
+      users.collect { |user|
+        User.new(
+          username: user["username"],
+          email: user["email"],
+          password: user["password"]
+        )
+      }
+    end
+  end
+
   def create_bill_query(bill)
     "
-    INSERT INTO 
+    INSERT INTO
       bills (
         bill_id,
         amount,
@@ -109,7 +135,8 @@ class RdsClient
   end
 
   def update_user_bill_query(bill)
-    "UPDATE
+    "
+    UPDATE
       bills
     SET
       amount = '#{bill.amount}',
@@ -119,6 +146,44 @@ class RdsClient
       note = '#{bill.note}'
     WHERE
       bills.bill_id = '#{bill.bill_id}';
+    "
+  end
+
+
+  def get_user_by_username_query(username)
+    "
+    SELECT
+    *
+    FROM users
+    WHERE
+    users.username = '#{username}';
+    "
+  end
+
+
+  def get_user_by_email_query(email)
+    "
+    SELECT
+    *
+    FROM users
+    WHERE
+    users.email = '#{email}';
+    "
+  end
+
+  def create_user_query(user)
+    "
+    INSERT INTO
+      users (
+        username,
+        email,
+        password
+      )
+    VALUES (
+      '#{user.username}',
+      '#{user.email}',
+      '#{user.password}'
+    );
     "
   end
 

@@ -1,0 +1,16 @@
+%div.calendar-form-container
+  %div.calendar-form
+    %div
+      %h3.calendar-form-title Log in
+      = form_tag(@user, {action: "login_attempt", class: "form form-horizontal"}) do |f|
+        .form-group
+          %label.col-sm-4.control-label Username:
+          .col-sm-6
+            = text_field_tag :username_or_email, nil, class: 'form-control'
+        .form-group
+          %label.col-sm-4.control-label Password:
+          .col-sm-6
+            = password_field_tag :password, nil, class: 'form-control'
+        .form-group
+          .col-sm-6.col-sm-offset-4
+            = submit_tag "Submit", class: "btn btn-primary"

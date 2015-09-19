@@ -2,11 +2,13 @@ require 'securerandom'
 
 class BillsController < ApplicationController
 
+  before_filter :authenticate_user, :only => [:new, :index, :create, :show, :edit, :update]
+
   def index
     rds = RdsClient.new
 
     #TODO: change the hard-code username to be the login username.
-    bills = rds.get_user_bills('ziyuchen', params[:start], params[:end])
+    bills = rds.get_user_bills(@current_user, params[:start], params[:end])
 
     # Should show all the bills you have for given time range
     @bills_by_time = BillAnalyzer.sort_bills_by_date(bills)
@@ -24,7 +26,7 @@ class BillsController < ApplicationController
       bill_id: SecureRandom.uuid,
       create_timestamp: Time.now,
       is_deleted: false,
-      username: "ziyuchen"
+      username: @current_user
     }))
 
     rds = RdsClient.new
@@ -73,7 +75,7 @@ class BillsController < ApplicationController
     }))
 
     rds = RdsClient.new
-    rds.update(bill)
+    rds.update_bill(bill)
     flash[:success] = "Finish updating the bill"
     redirect_to bill_path
   end

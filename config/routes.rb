@@ -3,8 +3,10 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'bills#index'
+  root :to => "sessions#login"
 
+  post '/', to: "sessions#login_attempt"
+  get 'logout', :to => "sessions#logout"
   resources :bills
   resources :bill_searches, only: :new
   resources :bill_graphs, only: :new

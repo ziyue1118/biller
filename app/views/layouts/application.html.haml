@@ -10,6 +10,15 @@
       .container-fluid
         .navbar-header
           %a.navbar-brand Biller
+        - if @current_user
+          .sign-in-container
+            %ul.nav.navbar-nav.navbar-right
+              %li.sign-in-item Welcome
+              %li.sign-in-item
+                = @current_user
+              %li.sign-in-button
+                %div
+                  = link_to "Logout", {controller:'sessions', action: 'logout'}, class: 'btn btn-info log-out-button'
     - flash.each do |key, msg|
       = content_tag :div, msg, class: "alert alert-#{key}" if msg.is_a?(String)
     = yield
