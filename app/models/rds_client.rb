@@ -4,6 +4,10 @@ class RdsClient
     @rds = RdsConnection.new
   end
 
+  def close_connection
+    @rds.close_connection
+  end
+
   def save(bill)
     @rds.exec(create_bill_query(bill))
   end
@@ -35,6 +39,10 @@ class RdsClient
 
   def get_user_by_email(email)
     to_user(@rds.exec(get_user_by_email_query(email)))
+  end
+
+  def get_all_usernames
+    @rds.exec(get_all_usernames_query()).collect { |user| user["username"] }
   end
 
   def to_bill(bills)
@@ -187,5 +195,13 @@ class RdsClient
     "
   end
 
+  def get_all_usernames_query
+    "
+    SELECT
+      username
+    FROM users
+    GROUP BY username;
+    "
+  end
 
 end

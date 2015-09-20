@@ -6,6 +6,7 @@ app = angular.module 'biller', [
   'calendar',
   'calendarPopoverDirectiveModule',
   'equalValidationDirectiveModule',
+  'uniqueUsernameDirectiveModule',
   'ui.bootstrap',
   'ui.select',
   'bill_search',

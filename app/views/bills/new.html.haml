@@ -1,19 +1,19 @@
 %div.calendar-form-container(ng-controller='BillCreateController')
   %div.calendar-form
     %div
-      %form
+      %form(name="billForm" novalidate)
         %h3.calendar-form-title  Create new bill
         .form.form-horizontal
-          .form-group
+          .form-group(ng-class="{ 'has-error' : billForm.amount.$invalid && !billForm.amount.$pristine }")
             %label.col-sm-2.control-label Amount
             .col-sm-8
               .input-group
                 %span.input-group-addon $
-                %input.form-control(ng-model="bill.amount")
+                %input.form-control(ng-model="bill.amount" name="amount" required)
           .form-group
             %label.col-sm-2.control-label Category
             .col-sm-8
-              %ui-select(ng-model="bill.category" required="true" reset-search-input="false")
+              %ui-select(ng-model="bill.category" name="category" required reset-search-input="false")
                 %ui-select-match(placeholder="Select category or add new one...")
                   %span
                     {{$select.selected || $select.search}}
@@ -26,7 +26,7 @@
             %label.col-sm-2.control-label Date
             .col-sm-8
               .input-group
-                %input.form-control(ng-model="bill.date" datepicker-popup="{{format}}" is-open="isOpened" placeholder="Select a date")
+                %input.form-control(ng-model="bill.date" required datepicker-popup="{{format}}" is-open="isOpened" placeholder="Select a date" name="date")
                 %span.input-group-addon
                   %i.glyphicon.glyphicon-calendar(ng-click="open($event)")
           .form-group
@@ -34,17 +34,19 @@
             .col-sm-8
               .radio-inline
                 %label.control-label
-                %input(type="radio" checked ng-model="bill.is_expense" value="expense" )
+                %input(type="radio" checked ng-model="bill.is_expense" value="expense")
                 Expense
               .radio-inline
                 %label.control-label
                 %input(type="radio" ng-model="bill.is_expense" value="earn")
                 Earn
-          .form-group
+          .form-group(ng-class="{ 'has-error' : billForm.note.$invalid && !billForm.note.$pristine }")
             %label.col-sm-2.control-label Note
             .col-sm-8
-              %input.form-control(ng-model="bill.note")
+              %input.form-control(ng-model="bill.note" required)
           .form-group
             .col-sm-8.col-sm-offset-2
-              %button.btn.btn-primary(type="submit" ng-click="createBill(bill)") Submit
+              %button.btn.btn-primary(type="submit" ng-click="createBill(bill)" ng-disabled="billForm.$invalid") Submit
               %a.btn.btn-primary{href: bills_path()} Cancel
+          %div
+            {{bill.date}}

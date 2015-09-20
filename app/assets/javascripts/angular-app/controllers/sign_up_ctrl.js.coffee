@@ -27,8 +27,7 @@ sign_up.controller 'SignUpController', ($scope, CalendarService, $modal, $log)->
         $scope.createUser($scope.user)
       () ->
         $log.info('Modal dismissed at: ' + new Date())
-    );
-
+    )
 
 sign_up.controller 'ModalInstanceCtrl', ($scope, $modalInstance, user)->
 

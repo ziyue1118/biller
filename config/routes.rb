@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   post '/', to: "sessions#login_attempt"
   get 'logout', :to => "sessions#logout"
+  get 'users/check/:username', :to => "users#is_unique_username"
   resources :bills
   resources :bill_searches, only: :new
   resources :bill_graphs, only: :new

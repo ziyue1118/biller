@@ -10,13 +10,13 @@
             .form-group(ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }")
               %label.col-sm-3.control-label Username
               .col-sm-7
-                %input.form-control(ng-model="user.username" name="username" placeholder="Username" required)
-                %p.help-block(ng-show="userForm.username.$invalid && !userForm.username.$pristine")You name is required
+                %input.form-control(ng-model="user.username" name="username" placeholder="Username" required unique-username="user.username")
+                %p.help-block(ng-show="userForm.username.$error.uniqueUsername") Username is already taken
             .form-group(ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }")
               %label.col-sm-3.control-label Email
               .col-sm-7
                 %input.form-control(type="email" name="email" ng-model="user.email" placeholder="Email" required)
-                %p.help-block(ng-show="userForm.email.$invalid && !userForm.email.$pristine")Enter a valid email
+                %p.help-block(ng-show="userForm.email.$invalid && !userForm.email.$pristine")Please enter a valid email
             .form-group(ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }")
               %label.col-sm-3.control-label Password
               .col-sm-7
@@ -36,11 +36,11 @@
       .form-group
         %label.col-sm-4.control-label Username:
         .col-sm-6
-          = text_field_tag :username_or_email, nil, class: 'form-control'
+          = text_field_tag :username_or_email, nil, class: 'form-control', required: true
       .form-group
         %label.col-sm-4.control-label Password:
         .col-sm-6
-          = password_field_tag :password, nil, class: 'form-control'
+          = password_field_tag :password, nil, class: 'form-control', required: true
       .form-group
         .col-sm-6.col-sm-offset-4
           = submit_tag "Sign In", class: "btn btn-primary col-sm-12"

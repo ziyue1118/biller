@@ -34,4 +34,10 @@ class RdsConnection
       end
     end
   end
+
+  def close_connection
+    if @conn.nil?
+      @conn.close()
+    end
+  end
 end

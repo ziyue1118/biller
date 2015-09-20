@@ -14,6 +14,7 @@ class BillSearch
   def retrieve_bills(username)
     rds = RdsClient.new
     bills = rds.get_user_bills(username, @start, @end)
+    rds.close_connection
     bills
   end
 

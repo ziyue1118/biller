@@ -13,6 +13,8 @@ class BillsController < ApplicationController
     # Should show all the bills you have for given time range
     @bills_by_time = BillAnalyzer.sort_bills_by_date(bills)
 
+    rds.close_connection()
+
     respond_to do |format|
       format.html
       format.json { render json: JSON.pretty_generate(@bills_by_time) }
@@ -30,6 +32,8 @@ class BillsController < ApplicationController
     rds = RdsClient.new
     rds.save(bill)
 
+    rds.close_connection()
+
     flash[:success] = "Successfully created a Bill!!"
 
     redirect_to bills_path
@@ -42,6 +46,7 @@ class BillsController < ApplicationController
   def show
     rds = RdsClient.new
     bills = rds.get_user_bill_by_id(params[:id])
+    rds.close_connection()
 
     if bills.empty?
       flash[:danger] = "There is no bill with #{params[:id]}"
@@ -58,6 +63,7 @@ class BillsController < ApplicationController
   def edit
     rds = RdsClient.new
     bills = rds.get_user_bill_by_id(params[:id])
+    rds.close_connection()
 
     if bills.empty?
       flash[:danger] = "There is no bill with #{params[:id]}"
@@ -74,6 +80,7 @@ class BillsController < ApplicationController
 
     rds = RdsClient.new
     rds.update_bill(bill)
+    rds.close_connection()
     flash[:success] = "Finish updating the bill"
     redirect_to bill_path
   end

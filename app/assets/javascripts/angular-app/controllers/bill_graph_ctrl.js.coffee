@@ -36,6 +36,7 @@ bill_graph.controller 'BillGraphController', ($scope, CalendarService) ->
       left: 30
 
     Object.keys(bills).filter((v) -> v[0] == "$").forEach((v) -> delete bills[v]) # exclude $resolved and $promise
+    return if Object.keys(bills).length == 0
     start_date = Object.keys(bills)[0]
     end_date = Object.keys(bills)[Object.keys(bills).length - 1]
 

@@ -26,6 +26,9 @@ class User
     else
       users = rds.get_user_by_username(username_or_email)
     end
+
+    rds.close_connection()
+
     if users[0] && users[0].match_password(password)
       return users[0]
     else
