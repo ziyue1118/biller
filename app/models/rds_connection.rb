@@ -7,10 +7,10 @@ class RdsConnection
     if @conn.nil?
       @conn = PG::Connection.new(
         dbname: APP_CONFIG['db_name'],
-        host: APP_CONFIG['rds_endpoint'],
-        port: APP_CONFIG['port'],
-        user: APP_CONFIG['username'],
-        password: APP_CONFIG['password']
+        host: APP_CONFIG['db_endpoint'],
+        port: APP_CONFIG['db_port'],
+        user: APP_CONFIG['db_username'],
+        password: APP_CONFIG['db_password']
       )
     end
   end

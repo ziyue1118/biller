@@ -30,21 +30,25 @@
     .modal-footer
       %button.btn.btn-primary(ng-disabled="userForm.$invalid" ng-click="submit()") Submit
       %button.btn.btn-warning(ng-click="cancel()") Cancel
-  %div.login-form
-    %h3.calendar-form-title Log in
-    = form_tag(@user, {action: "login_attempt", class: "form form-horizontal"}) do |f|
+  %div.login-form-container.col-md-12
+    %h3.login-form-title Log in
+    %div.login-image.col-md-4
+      = image_tag "gou.jpeg", size: "210x200"
+    %div.login-form.col-md-8
+      = form_tag(@user, {action: "login_attempt", class: "form form-horizontal"}) do |f|
+        .form-group
+          %label.col-md-3.control-label Username
+          .col-md-9
+            = text_field_tag :username_or_email, nil, class: 'form-control', required: true
+        .form-group
+          %label.col-md-3.control-label Password
+          .col-md-9
+            = password_field_tag :password, nil, class: 'form-control', required: true
+        .form-group
+          .col-md-9.col-md-offset-3
+            = submit_tag "Sign In", class: "btn btn-primary col-md-12"
+        %div.clearfix
       .form-group
-        %label.col-sm-4.control-label Username:
-        .col-sm-6
-          = text_field_tag :username_or_email, nil, class: 'form-control', required: true
-      .form-group
-        %label.col-sm-4.control-label Password:
-        .col-sm-6
-          = password_field_tag :password, nil, class: 'form-control', required: true
-      .form-group
-        .col-sm-6.col-sm-offset-4
-          = submit_tag "Sign In", class: "btn btn-primary col-sm-12"
-      %div.clearfix
-    .form-group
-      .col-sm-6.col-sm-offset-4
-        %button.btn.btn-primary.col-sm-12(ng-click="open()") Sign Up
+        .col-md-9.col-md-offset-3
+          %button.btn.btn-primary.col-md-12(ng-click="open()") Sign Up
+
