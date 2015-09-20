@@ -19,6 +19,11 @@ body {
   padding: 7px;
 }
 
+.modal-form-container {
+  width: 80%;
+  margin: auto;
+}
+
 #calendar {
   margin: auto;
   background-color: #FFFFFF;
@@ -29,12 +34,27 @@ body {
   padding: 10px;
 }
 
+.login-form {
+  border-bottom: 3px solid;
+  border-bottom-color: #eeeeee;
+  border-right: 3px solid;
+  border-right-color: #eeeeee;
+  background-color: #FFFFFF;
+  padding-bottom: 40px;
+}
+
+.login-form .form-group {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
 .calendar-form {
   border-bottom: 3px solid;
   border-bottom-color: #eeeeee;
   border-right: 3px solid;
   border-right-color: #eeeeee;
   background-color: #FFFFFF;
+  padding-bottom: 20px;
 }
 
 .calendar-form-container {

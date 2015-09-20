@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :bills
   resources :bill_searches, only: :new
   resources :bill_graphs, only: :new
+  resources :users, only: :create
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

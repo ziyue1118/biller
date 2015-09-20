@@ -20,8 +20,6 @@ class BillsController < ApplicationController
   end
 
   def create
-    puts params
-    #TODO: change the hard-code username to be the login username.
     bill = Bill.new(params[:bill].merge!({
       bill_id: SecureRandom.uuid,
       create_timestamp: Time.now,

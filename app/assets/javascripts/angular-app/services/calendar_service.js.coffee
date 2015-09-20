@@ -7,4 +7,5 @@ calendar_service.factory 'CalendarService', ["$resource", ($resource) ->
   createBill: $resource('/bills', {}, {})
   getBill: $resource('/bills/:id.json', {id: '@id'}, {exec: {method: 'GET'}})
   updateBill: $resource('/bills/:id', {}, {exec: {method: 'PUT'}})
+  createUser: $resource('/users', {}, {})
 ]

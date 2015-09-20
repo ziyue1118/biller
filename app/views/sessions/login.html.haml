@@ -1,16 +1,50 @@
-%div.calendar-form-container
-  %div.calendar-form
-    %div
-      %h3.calendar-form-title Log in
-      = form_tag(@user, {action: "login_attempt", class: "form form-horizontal"}) do |f|
-        .form-group
-          %label.col-sm-4.control-label Username:
-          .col-sm-6
-            = text_field_tag :username_or_email, nil, class: 'form-control'
-        .form-group
-          %label.col-sm-4.control-label Password:
-          .col-sm-6
-            = password_field_tag :password, nil, class: 'form-control'
-        .form-group
-          .col-sm-6.col-sm-offset-4
-            = submit_tag "Submit", class: "btn btn-primary"
+%div.calendar-form-container(ng-controller="SignUpController")
+  %script(type="text/ng-template" id="signUp.html")
+    .modal-header
+      %h3.modal-title
+        Sign Up
+    .modal-body
+      .modal-form-container
+        %form(name="userForm" novalidate)
+          .form.form-horizontal
+            .form-group(ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }")
+              %label.col-sm-3.control-label Username
+              .col-sm-7
+                %input.form-control(ng-model="user.username" name="username" placeholder="Username" required)
+                %p.help-block(ng-show="userForm.username.$invalid && !userForm.username.$pristine")You name is required
+            .form-group(ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }")
+              %label.col-sm-3.control-label Email
+              .col-sm-7
+                %input.form-control(type="email" name="email" ng-model="user.email" placeholder="Email" required)
+                %p.help-block(ng-show="userForm.email.$invalid && !userForm.email.$pristine")Enter a valid email
+            .form-group(ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }")
+              %label.col-sm-3.control-label Password
+              .col-sm-7
+                %input.form-control(type="password" ng-model="user.password" placeholder="Password" name="password" ng-minlength="6" ng-pattern="/^[A-z0-9]*$/" required)
+                %p.help-block(ng-show="userForm.password.$error.minlength || userForm.password.$error.pattern") Enter a valid password, length > 6 and contain letter and number only
+            .form-group(ng-class="{ 'has-error' : userForm.password_confirmation.$invalid && !userForm.password_confirmation.$pristine }")
+              %label.col-sm-3.control-label Confirm Password
+              .col-sm-7
+                %input.form-control(type="password" ng-model="user.password_confirmation" placeholder="Confirm Password" name="password_confirmation" equal-validation="user.password" required)
+                %p.help-block(ng-show="userForm.password_confirmation.$error.equalValidation") Does not match password
+    .modal-footer
+      %button.btn.btn-primary(ng-disabled="userForm.$invalid" ng-click="submit()") Submit
+      %button.btn.btn-warning(ng-click="cancel()") Cancel
+  %div.login-form
+    %h3.calendar-form-title Log in
+    = form_tag(@user, {action: "login_attempt", class: "form form-horizontal"}) do |f|
+      .form-group
+        %label.col-sm-4.control-label Username:
+        .col-sm-6
+          = text_field_tag :username_or_email, nil, class: 'form-control'
+      .form-group
+        %label.col-sm-4.control-label Password:
+        .col-sm-6
+          = password_field_tag :password, nil, class: 'form-control'
+      .form-group
+        .col-sm-6.col-sm-offset-4
+          = submit_tag "Sign In", class: "btn btn-primary col-sm-12"
+      %div.clearfix
+    .form-group
+      .col-sm-6.col-sm-offset-4
+        %button.btn.btn-primary.col-sm-12(ng-click="open()") Sign Up
